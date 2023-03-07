@@ -41,9 +41,8 @@ with open('/home/htxu91/rlhf/black_final.json.detail.latest', 'w') as fwobj:
                     #   message = 'invalid'
                 #   continue
 
-            time.sleep(30)
+            # time.sleep(30)
 
-            
             if np.mod(idx, 1000) == 0:
                 print(sent, '===', message, '====model====', 'gpt-3.5-turbo')
             content['chatgpt_predict'] = message
