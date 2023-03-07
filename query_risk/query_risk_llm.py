@@ -41,7 +41,7 @@ with open('/home/htxu91/rlhf/black_final.json.detail.latest', 'w') as fwobj:
                     #   message = 'invalid'
                 #   continue
 
-            time.sleep(30)
+            time.sleep(5)
 
             
             if np.mod(idx, 1000) == 0:
