@@ -4,7 +4,12 @@ from langchain import OpenAIChat, LLMChain, PromptTemplate
 from torch.utils.data import Dataset, DataLoader
 
 import os
-os.environ['OPENAI_API_KEY'] = ''
+key_list = []
+with open('/home/htxu91/keys.txt', 'r') as frobj:
+    for line in frobj:
+        key_list.append(line.strip())
+        
+os.environ['OPENAI_API_KEY'] = key_list[0]
 
 REWARD_TEMPLATE = dict(
     template=(
