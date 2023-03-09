@@ -17,8 +17,8 @@ with open('/home/htxu91/keys.txt', 'r') as frobj:
     for line in frobj:
         key_list.append(line.strip())
 
-with open('/home/htxu91/rlhf/hhrlhf_query.json', 'w') as fwobj:
-    with open('/home/htxu91/rlhf/hhrlhf_query.json.qa', 'r') as frobj:
+with open('/home/htxu91/rlhf/hhrlhf_query.json.qa', 'w') as fwobj:
+    with open('/home/htxu91/rlhf/hhrlhf_query.json', 'r') as frobj:
         for idx, line in tqdm(enumerate(frobj)):
             content = json.loads(line.strip())
             sent = content['text']
