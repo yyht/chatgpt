@@ -1,6 +1,6 @@
 
 
-from langchain import OpenAIChat, LLMChain, PromptTemplate
+from langchain import OpenAIChat, LLMChain, PromptTemplate, ChatPromptTemplate
 from torch.utils.data import Dataset, DataLoader
 
 import os
@@ -8,10 +8,10 @@ key_list = []
 with open('/home/htxu91/keys.txt', 'r') as frobj:
     for line in frobj:
         key_list.append(line.strip())
-        
+
 os.environ['OPENAI_API_KEY'] = key_list[0]
 
-REWARD_TEMPLATE = dict(
+REWARD_TEMPLATE = ('user', dict(
     template=(
         "选择题，请运用你的知识选择正确的答案和原因，正确的答案可能包含多个选项。"
         "\n问题:\n{text}\n"
@@ -19,7 +19,7 @@ REWARD_TEMPLATE = dict(
         "并说明原因。\n"
     ),
     input_variables=["text"],
-)
+))
 
 openai_llm = OpenAIChat(
             model_name='gpt-3.5-turbo',
@@ -27,7 +27,7 @@ openai_llm = OpenAIChat(
             max_tokens=512,
         )
 
-prompt_template = PromptTemplate(**REWARD_TEMPLATE)
+prompt_template = ChatPromptTemplate(**REWARD_TEMPLATE)
 llm = LLMChain(llm=openai_llm, prompt=prompt_template)
 
 with open('/home/htxu91/rlhf/black_final.json.langchain', 'w') as fwobj:
