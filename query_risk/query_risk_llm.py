@@ -26,22 +26,22 @@ with open('/home/htxu91/rlhf/black_final.json.detail.latest', 'w') as fwobj:
             random_key = np.random.choice(key_list)
             openai.api_key = random_key
 
-            if idx <= 844:
+            if idx <= 2844:
                 continue
 
             for _ in range(10):
-                #try:
+                try:
                     response = openai.ChatCompletion.create(model="gpt-3.5-turbo", 
                                             messages=[{"role": "user", "content": template.format(sent)}],
                                             temperature=0, 
                                             max_tokens=512)
                     message = response['choices'][0]['message']['content']
                     break
-                #except:
-                    #   message = 'invalid'
-                #   continue
+                except:
+                    message = 'invalid'
+                    continue
 
-            time.sleep(5)
+            #time.sleep(5)
 
             
             if np.mod(idx, 1000) == 0:
