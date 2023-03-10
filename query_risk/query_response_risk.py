@@ -62,7 +62,7 @@ def quality_fn(query, response):
     return message
 
 with open('/home/htxu91/rlhf/rlhf_hhrlhf_chatgpt_3.7B_13B.json.quality', 'w') as fwobj:
-    with open('/home/htxu91/rlhf/rlhf_hhrlhf_chatgpt_3.7B_13B.json.json', 'r') as frobj:
+    with open('/home/htxu91/rlhf/rlhf_hhrlhf_chatgpt_3.7B_13B.json', 'r') as frobj:
         for idx, line in tqdm(enumerate(frobj)):
             content = json.loads(line.strip())
             query = None
