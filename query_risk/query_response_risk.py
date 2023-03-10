@@ -35,7 +35,7 @@ def qa_fn(text):
         try:
             response = openai.ChatCompletion.create(model="gpt-3.5-turbo", 
                                     messages=[{"role": "user", "content": qa_template.format(text)}],
-                                    temperature=0, 
+                                    temperature=0.5, 
                                     max_tokens=512)
             message = response['choices'][0]['message']['content']
             break
@@ -52,7 +52,7 @@ def quality_fn(query, response):
         try:
             response = openai.ChatCompletion.create(model="gpt-3.5-turbo", 
                                     messages=[{"role": "user", "content": quality_template.format(query, response)}],
-                                    temperature=0, 
+                                    temperature=0.5, 
                                     max_tokens=512)
             message = response['choices'][0]['message']['content']
             break
@@ -85,5 +85,4 @@ with open('/home/htxu91/rlhf/rlhf_hhrlhf_chatgpt_3.7B_13B.json.quality', 'w') as
 
             if np.mod(idx, 1000) == 0:
                 print(content, '====model====', 'gpt-3.5-turbo')
-            content['chatgpt_predict'] = message
             fwobj.write(json.dumps(content, ensure_ascii=False)+'\n')
