@@ -84,6 +84,6 @@ with open('/home/htxu91/rlhf/rlhf_hhrlhf_chatgpt_3.7B_13B.json.quality', 'w') as
                 content[key]['quality'] = quality_fn(query, response)
 
             if np.mod(idx, 1000) == 0:
-                print(sent, '===', message, '====model====', 'gpt-3.5-turbo')
+                print(content, '====model====', 'gpt-3.5-turbo')
             content['chatgpt_predict'] = message
             fwobj.write(json.dumps(content, ensure_ascii=False)+'\n')
