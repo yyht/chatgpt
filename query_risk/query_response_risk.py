@@ -35,7 +35,7 @@ def qa_fn(text):
         try:
             response = openai.ChatCompletion.create(model="gpt-3.5-turbo", 
                                     messages=[{"role": "user", "content": qa_template.format(text)}],
-                                    temperature=0.5, 
+                                    temperature=0.0, 
                                     max_tokens=512)
             message = response['choices'][0]['message']['content']
             break
@@ -52,7 +52,7 @@ def quality_fn(query, response):
         try:
             response = openai.ChatCompletion.create(model="gpt-3.5-turbo", 
                                     messages=[{"role": "user", "content": quality_template.format(query, response)}],
-                                    temperature=0.5, 
+                                    temperature=0.0, 
                                     max_tokens=512)
             message = response['choices'][0]['message']['content']
             break
