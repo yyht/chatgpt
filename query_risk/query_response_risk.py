@@ -86,3 +86,4 @@ with open('/home/htxu91/rlhf/rlhf_hhrlhf_chatgpt_3.7B_13B.json.quality', 'w') as
             if np.mod(idx, 1000) == 0:
                 print(content, '====model====', 'gpt-3.5-turbo')
             fwobj.write(json.dumps(content, ensure_ascii=False)+'\n')
+            break
