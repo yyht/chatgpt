@@ -4,7 +4,7 @@ import json
 
 # Load your API key from an environment variable or secret management service
 
-quality_template = sent = """
+quality_template = """
 选择题，请运用你的知识选择正确的答案并说出理由。
 问题:\n
 {}
@@ -86,4 +86,4 @@ with open('/home/htxu91/rlhf/rlhf_hhrlhf_chatgpt_3.7B_13B.json.quality', 'w') as
             if np.mod(idx, 1000) == 0:
                 print(content, '====model====', 'gpt-3.5-turbo')
             fwobj.write(json.dumps(content, ensure_ascii=False)+'\n')
-            break
+            
