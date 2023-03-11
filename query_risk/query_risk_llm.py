@@ -18,7 +18,7 @@ with open('/home/htxu91/keys.txt', 'r') as frobj:
     for line in frobj:
         key_list.append(line.strip())
 
-with open('/home/htxu91/rlhf/black_final.json.detail.latest.v1', 'w') as fwobj:
+with open('/home/htxu91/rlhf/black_final.json.detail.latest.v2', 'w') as fwobj:
     with open('/home/htxu91/rlhf/black_final.json', 'r') as frobj:
         for idx, line in tqdm(enumerate(frobj)):
             content = json.loads(line.strip())
@@ -27,7 +27,7 @@ with open('/home/htxu91/rlhf/black_final.json.detail.latest.v1', 'w') as fwobj:
             random_key = np.random.choice(key_list)
             openai.api_key = random_key
 
-            if idx <= 41363:
+            if idx <= 95123:
                 continue
 
             for _ in range(10):
