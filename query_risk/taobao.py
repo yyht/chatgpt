@@ -28,12 +28,12 @@ with open('/home/htxu91/rlhf/taobao_risk.txt', 'w') as fwobj:
 
                 for _ in range(10):
                     try:
-                        response = openai.ChatCompletion.create(model="gpt-3.5-turbo", 
+                        response = openai.ChatCompletion.create(model="gpt-3.5-turbo-0301", 
                                                 messages=[{"role": "user", "content": template.format(sent)}],
                                                 temperature=0.7,
                                                 presence_penalty=0.0,
                                                 top_p=1.0,
-                                                frequency_penalty=0.5,
+                                                frequency_penalty=1.0,
                                                 max_tokens=512)
                         query_message = response['choices'][0]['message']['content']
                         break
@@ -54,12 +54,12 @@ with open('/home/htxu91/rlhf/taobao_risk.txt', 'w') as fwobj:
                         query = re.sub('^\d\\.+', '', query)
                         for _ in range(10):
                             try:
-                                response = openai.ChatCompletion.create(model="gpt-3.5-turbo", 
+                                response = openai.ChatCompletion.create(model="gpt-3.5-turbo-0301", 
                                                         messages=[{"role": "user", "content": template.format(query)}],
                                                         temperature=0.7,
                                                         presence_penalty=0.0,
                                                         top_p=1.0,
-                                                        frequency_penalty=0.5,
+                                                        frequency_penalty=1.0,
                                                         max_tokens=512)
                                 response_message = response['choices'][0]['message']['content']
                                 break
@@ -83,5 +83,5 @@ with open('/home/htxu91/rlhf/taobao_risk.txt', 'w') as fwobj:
 
 
 
-                
+
 
