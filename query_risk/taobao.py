@@ -4,7 +4,7 @@ import json
 
 from tqdm import tqdm
 import numpy as np
-import time
+import time, re
 
 key_list = []
 with open('/home/htxu91/keys.txt', 'r') as frobj:
@@ -41,30 +41,39 @@ with open('/home/htxu91/rlhf/taobao_risk.txt', 'w') as fwobj:
                         query_message = 'invalid'
                         continue
 
-                if query_message != 'invalid':
-                    for _ in range(10):
-                        try:
-                            response = openai.ChatCompletion.create(model="gpt-3.5-turbo", 
-                                                    messages=[{"role": "user", "content": template.format(query_message)}],
-                                                    temperature=0.7,
-                                                    presence_penalty=0.0,
-                                                    top_p=1.0,
-                                                    frequency_penalty=0.0,
-                                                    max_tokens=512)
-                            response_message = response['choices'][0]['message']['content']
-                            break
-                        except:
-                            response_message = 'invalid'
-                            continue
-
                 d = {
                     'query':query_message,
                     'risk': risk,
-                    'response':response_message,
+                    'response':[],
                     'version': 'gpt-3.5-turbo',
                     'prompt': sent
                 }
+
+                if query_message != 'invalid':
+                    for query in query_message.split('\n'):
+                        query = re.sub('^\d\\.+', '', query)
+                        for _ in range(10):
+                            try:
+                                response = openai.ChatCompletion.create(model="gpt-3.5-turbo", 
+                                                        messages=[{"role": "user", "content": template.format(query)}],
+                                                        temperature=0.7,
+                                                        presence_penalty=0.0,
+                                                        top_p=1.0,
+                                                        frequency_penalty=0.0,
+                                                        max_tokens=512)
+                                response_message = response['choices'][0]['message']['content']
+                                break
+                            except:
+                                response_message = 'invalid'
+                                continue
+                        if response_message != 'invalid':
+                            d['response'].append({
+                                'query':query,
+                                'response':response_message
+                                })
+
                 fwobj.write(json.dumps(d, ensure_ascii=False)+'\n')
 
                 if np.mod(idx, 1000) == 0:
                     print(d, '====model====', 'gpt-3.5-turbo')
+                break
