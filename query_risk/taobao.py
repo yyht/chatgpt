@@ -49,7 +49,7 @@ with open('/home/htxu91/rlhf/taobao_risk.txt', 'w') as fwobj:
                     'prompt': sent
                 }
 
-                if query_message != 'invalid':
+                if query_message != 'invalid' and risk not in ['导购']:
                     for query in query_message.split('\n'):
                         query = re.sub('^\d\\.+', '', query)
                         for _ in range(10):
