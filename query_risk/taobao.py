@@ -76,7 +76,6 @@ with open('/home/htxu91/rlhf/taobao_risk.txt', 'w') as fwobj:
 
                 if np.mod(idx, 1000) == 0:
                     print(d, '====model====', 'gpt-3.5-turbo')
-                break
 
 
 
