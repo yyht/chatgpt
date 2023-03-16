@@ -20,8 +20,11 @@ with open('/home/htxu91/rlhf/taobao_risk.txt', 'w') as fwobj:
         with open('/home/htxu91/chatgpt/query_risk/template.txt') as frobj:
             for idx, line in tqdm(enumerate(frobj)):
                 content = line.strip().split('|')
-                sent = content[0]
-                risk = content[1]
+                try:
+                    sent = content[0]
+                    risk = content[1]
+                except:
+                    continue
 
                 random_key = np.random.choice(key_list)
                 openai.api_key = random_key
@@ -76,11 +79,3 @@ with open('/home/htxu91/rlhf/taobao_risk.txt', 'w') as fwobj:
 
                 if np.mod(idx, 1000) == 0:
                     print(d, '====model====', 'gpt-3.5-turbo')
-
-
-
-
-
-
-
-
