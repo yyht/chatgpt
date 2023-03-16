@@ -16,7 +16,7 @@ template = u"""
 """
 
 with open('/home/htxu91/rlhf/taobao_risk.txt', 'w') as fwobj:
-    for _ in range(2):
+    for _ in range(10):
         with open('/home/htxu91/chatgpt/query_risk/template.txt') as frobj:
             for idx, line in tqdm(enumerate(frobj)):
                 content = line.strip().split('|')
