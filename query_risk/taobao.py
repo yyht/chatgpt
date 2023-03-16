@@ -33,7 +33,7 @@ with open('/home/htxu91/rlhf/taobao_risk.txt', 'w') as fwobj:
                                                 temperature=0.7,
                                                 presence_penalty=0.0,
                                                 top_p=1.0,
-                                                frequency_penalty=0.1,
+                                                frequency_penalty=0.5,
                                                 max_tokens=512)
                         query_message = response['choices'][0]['message']['content']
                         break
@@ -59,7 +59,7 @@ with open('/home/htxu91/rlhf/taobao_risk.txt', 'w') as fwobj:
                                                         temperature=0.7,
                                                         presence_penalty=0.0,
                                                         top_p=1.0,
-                                                        frequency_penalty=0.1,
+                                                        frequency_penalty=0.5,
                                                         max_tokens=512)
                                 response_message = response['choices'][0]['message']['content']
                                 break
@@ -77,3 +77,5 @@ with open('/home/htxu91/rlhf/taobao_risk.txt', 'w') as fwobj:
                 if np.mod(idx, 1000) == 0:
                     print(d, '====model====', 'gpt-3.5-turbo')
                 break
+
+            
