@@ -27,7 +27,7 @@ with open('/home/htxu91/rlhf/taobao_risk.txt', 'w') as fwobj:
                 openai.api_key = random_key
 
                 for _ in range(10):
-                    try:
+                    # try:
                         response = openai.ChatCompletion.create(model="gpt-3.5-turbo", 
                                                 messages=[{"role": "user", "content": template.format(sent)}],
                                                 temperature=0.7,
@@ -37,13 +37,13 @@ with open('/home/htxu91/rlhf/taobao_risk.txt', 'w') as fwobj:
                                                 max_tokens=512)
                         query_message = response['choices'][0]['message']['content']
                         break
-                    except:
-                        query_message = 'invalid'
-                        continue
+                    # except:
+                    #     query_message = 'invalid'
+                    #     continue
 
                 if query_message != 'invalid':
                     for _ in range(10):
-                        try:
+                        # try:
                             response = openai.ChatCompletion.create(model="gpt-3.5-turbo", 
                                                     messages=[{"role": "user", "content": template.format(query_message)}],
                                                     temperature=0.7,
@@ -53,9 +53,9 @@ with open('/home/htxu91/rlhf/taobao_risk.txt', 'w') as fwobj:
                                                     max_tokens=512)
                             response_message = response['choices'][0]['message']['content']
                             break
-                        except:
-                            response_message = 'invalid'
-                            continue
+                        # except:
+                        #     response_message = 'invalid'
+                        #     continue
 
                 d = {
                     'query':query_message,
