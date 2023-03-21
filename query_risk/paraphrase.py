@@ -24,7 +24,7 @@ template = """
 
 import pandas as pd
 with open('/home/htxu91/rlhf/dialog_safety.json', 'w') as fwobj:
-    df = pd.read_csv('/home/htxu91/rlhf/')
+    df = pd.read_csv('/home/htxu91/rlhf/PublicTest_Input.csv')
     for idx in tqdm(range(df.shape[0])):
         content = dict(df.loc[idx])
 
