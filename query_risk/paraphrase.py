@@ -54,28 +54,28 @@ with open('/home/htxu91/rlhf/dialog_safety.json', 'w') as fwobj:
             'prompt': content['prompt']
         }
 
-        if query_message != 'invalid':
-            for query in query_message.split('\n'):
-                query = re.sub('^\d\\.+', '', query)
-                for _ in range(10):
-                    try:
-                        response = openai.ChatCompletion.create(model="gpt-3.5-turbo-0301", 
-                                                messages=[{"role": "user", "content": template.format(query)}],
-                                                temperature=0.7,
-                                                presence_penalty=0.0,
-                                                top_p=1.0,
-                                                frequency_penalty=1.0,
-                                                max_tokens=512)
-                        response_message = response['choices'][0]['message']['content']
-                        break
-                    except:
-                        response_message = 'invalid'
-                        continue
-                if response_message != 'invalid':
-                    d['response'].append({
-                        'query':query,
-                        'response':response_message
-                        })
+        # if query_message != 'invalid':
+        #     for query in query_message.split('\n'):
+        #         query = re.sub('^\d\\.+', '', query)
+        #         for _ in range(10):
+        #             try:
+        #                 response = openai.ChatCompletion.create(model="gpt-3.5-turbo-0301", 
+        #                                         messages=[{"role": "user", "content": template.format(query)}],
+        #                                         temperature=0.7,
+        #                                         presence_penalty=0.0,
+        #                                         top_p=1.0,
+        #                                         frequency_penalty=1.0,
+        #                                         max_tokens=512)
+        #                 response_message = response['choices'][0]['message']['content']
+        #                 break
+        #             except:
+        #                 response_message = 'invalid'
+        #                 continue
+        #         if response_message != 'invalid':
+        #             d['response'].append({
+        #                 'query':query,
+        #                 'response':response_message
+        #                 })
 
         fwobj.write(json.dumps(d, ensure_ascii=False)+'\n')
 
