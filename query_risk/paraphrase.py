@@ -15,7 +15,7 @@ with open('/home/htxu91/keys.txt', 'r') as frobj:
         key_list.append(line.strip())
 
 template_paraphrase = u"""
-请基于输入句子，改写10个疑问句，要求主题类似，改变核心实体，保持句子的情感极性。输入句子:"{}"。输出:
+请基于输入句子，改写10个疑问句，要求主题类似，改变核心实体，保持句子的情感极性。输入句子:"{}"。输出句子:
 """
 
 template = """
@@ -38,8 +38,8 @@ with open('/home/htxu91/rlhf/dialog_safety.json', 'w') as fwobj:
                                         temperature=0.7,
                                         presence_penalty=0.0,
                                         top_p=1.0,
-                                        frequency_penalty=1.0,
-                                        max_tokens=512)
+                                        frequency_penalty=0.0,
+                                        max_tokens=2048)
                 query_message = response['choices'][0]['message']['content']
                 break
             except:
