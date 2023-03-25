@@ -68,6 +68,8 @@ df = pd.read_excel('/home/htxu91/chatgpt/data/black_query_v0.xlsx')
 with open('/home/htxu91/chatgpt/data/black_query_v0.json', 'w') as fwobj:
     for idx in tqdm(range(df.shape[0])):
         content = dict(df.loc[idx])
+        for key in content:
+            content[key] = str(content[key])
 
         query = content['query']
         content['chatgpt'] = {
@@ -85,6 +87,8 @@ df = pd.read_csv('/home/htxu91/chatgpt/data/PublicTest_Input.csv')
 with open('/home/htxu91/chatgpt/data/PublicTest_Input.json', 'w') as fwobj:
     for idx in tqdm(range(df.shape[0])):
         content = dict(df.loc[idx])
+        for key in content:
+            content[key] = str(content[key])
 
         query = content['prompt']
         content['chatgpt'] = {
