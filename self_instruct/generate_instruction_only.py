@@ -38,7 +38,6 @@ openai.api_key = random_key
 def encode_prompt(prompt_instructions):
     """Encode multiple prompt instructions into a single string."""
     prompt = open("/home/htxu91/chatgpt/self_instruct/prompt_cn_extend.txt").read() + "\n"
-    print(prompt, '===prompt===')
     for idx, task_dict in enumerate(prompt_instructions):
         instruction = task_dict["instruction"]
         instruction = re.sub(r"\s+", " ", instruction).strip().rstrip(":")
@@ -46,6 +45,7 @@ def encode_prompt(prompt_instructions):
         prompt += f"{idx + 1}. 指令: {instruction}\n"
     prompt += f"###\n"
     prompt += f"{idx + 2}. 指令:"
+    print(prompt)
     return prompt
 
 def find_word_in_string(w, s):
