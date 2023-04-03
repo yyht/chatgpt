@@ -43,8 +43,8 @@ def openai_completion(
     model_name="text-davinci-003",
     sleep_time=2,
     batch_size=1,
-    max_instances=sys.maxsize,
-    max_batches=sys.maxsize,
+    max_instances=10,
+    max_batches=1,
     return_text=False,
     **decoding_kwargs,
 ) -> Union[Union[StrOrOpenAIObject], Sequence[StrOrOpenAIObject], Sequence[Sequence[StrOrOpenAIObject]],]:
