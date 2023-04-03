@@ -94,13 +94,13 @@ def generate_instruction_following_data(
                 prompt_instructions = random.sample(seed_instruction_data, num_prompt_instructions)#    seed_instruction_data, num_prompt_instructions)
                 prompt = encode_prompt(prompt_instructions)
                 batch_inputs.append(prompt)
-            decoding_args = {
-                "temperature":temperature,
-                "n":1,
-                "max_tokens":1024,  # hard-code to maximize the length. the requests will be automatically adjusted
-                "top_p":top_p,
-                "stop":["\n20", "20.", "20."],
-            }
+            decoding_args = utils.OpenAIDecodingArguments(
+                temperature=temperature,
+                n=1,
+                max_tokens=1024,  # hard-code to maximize the length. the requests will be automatically adjusted
+                top_p=top_p,
+                stop=["\n20", "20.", "20."],
+            )
             request_start = time.time()
             results = utils.openai_completion(
                 prompts=batch_inputs,

@@ -45,8 +45,7 @@ def openai_completion(
     batch_size=1,
     max_instances=10,
     max_batches=1,
-    return_text=False,
-    decoding_kwargs={}
+    return_text=False
 ) -> Union[Union[StrOrOpenAIObject], Sequence[StrOrOpenAIObject], Sequence[Sequence[StrOrOpenAIObject]],]:
     """Decode with OpenAI API.
     Args:
@@ -108,7 +107,6 @@ def openai_completion(
                     model=model_name,
                     **batch_decoding_args.__dict__,
                 )
-                shared_kwargs.update(decoding_kwargs)
                 if api == "completion":
                     completion_batch = openai.Completion.create(prompt=prompt_batch, **shared_kwargs)
                 elif api == "chat":
