@@ -21,7 +21,7 @@ from rouge_score import rouge_scorer
 import utils
 
 import fire
-from gensim.summarization import bm25
+# from gensim.summarization import bm25
 from  transformers import AutoTokenizer
 checkpoint = "/home/htxu91/chatgpt/data/bert_tiny"
 tokenizer = AutoTokenizer.from_pretrained(checkpoint)
