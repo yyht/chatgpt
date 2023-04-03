@@ -43,9 +43,10 @@ def openai_completion(
     model_name="text-davinci-003",
     sleep_time=2,
     batch_size=1,
-    max_instances=10,
-    max_batches=1,
-    return_text=False
+    max_instances=sys.maxsize,
+    max_batches=sys.maxsize,
+    return_text=False,
+    **decoding_kwargs,
 ) -> Union[Union[StrOrOpenAIObject], Sequence[StrOrOpenAIObject], Sequence[Sequence[StrOrOpenAIObject]],]:
     """Decode with OpenAI API.
     Args:
@@ -106,6 +107,7 @@ def openai_completion(
                 shared_kwargs = dict(
                     model=model_name,
                     **batch_decoding_args.__dict__,
+                    **decoding_kwargs,
                 )
                 if api == "completion":
                     completion_batch = openai.Completion.create(prompt=prompt_batch, **shared_kwargs)
@@ -140,9 +142,9 @@ def openai_completion(
 
     if return_text:
         if api == "completion":
-            completions = [completion.text for completion in completions]
+            completions = [completion.text.encode('utf-8').decode('utf-8') for completion in completions]
         elif api == "chat":
-            completions = [completion.message.content for completion in completions]
+            completions = [completion.message.content.encode('utf-8').decode('utf-8') for completion in completions]
     if decoding_args.n > 1:
         # make completions a nested list, where each entry is a consecutive decoding_args.n of original entries.
         completions = [completions[i : i + decoding_args.n] for i in range(0, len(completions), decoding_args.n)]
@@ -157,7 +159,7 @@ def _make_w_io_base(f, mode: str):
         f_dirname = os.path.dirname(f)
         if f_dirname != "":
             os.makedirs(f_dirname, exist_ok=True)
-        f = open(f, mode=mode)
+        f = open(f, mode=mode, encoding="utf-8")
     return f
 
 
@@ -178,7 +180,7 @@ def jdump(obj, f, mode="w", indent=4, default=str):
     """
     f = _make_w_io_base(f, mode)
     if isinstance(obj, (dict, list)):
-        json.dump(obj, f, indent=indent, default=default)
+        json.dump(obj, f, indent=indent, default=default, ensure_ascii=False)
     elif isinstance(obj, str):
         f.write(obj)
     else:
