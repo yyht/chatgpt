@@ -46,8 +46,7 @@ def openai_completion(
     max_instances=1,
     max_batches=1,
     return_text=False,
-    **decoding_kwargs
-) -> Union[Union[StrOrOpenAIObject], Sequence[StrOrOpenAIObject], Sequence[Sequence[StrOrOpenAIObject]],]:
+    **decoding_kwargs):
     """Decode with OpenAI API.
     Args:
         prompts: A string or a list of strings to complete. If it is a chat model the strings should be formatted
