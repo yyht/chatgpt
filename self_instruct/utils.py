@@ -37,14 +37,14 @@ class OpenAIDecodingArguments(object):
 
 
 def openai_completion(
-    prompts: Union[str, Sequence[str], Sequence[dict[str, str]], dict[str, str]],
-    decoding_args: OpenAIDecodingArguments,
+    prompts,
+    decoding_args,
     api="completion",
     model_name="text-davinci-003",
     sleep_time=2,
     batch_size=1,
-    max_instances=sys.maxsize,
-    max_batches=sys.maxsize,
+    max_instances=1,
+    max_batches=1,
     return_text=False,
     **decoding_kwargs
 ) -> Union[Union[StrOrOpenAIObject], Sequence[StrOrOpenAIObject], Sequence[Sequence[StrOrOpenAIObject]],]:
