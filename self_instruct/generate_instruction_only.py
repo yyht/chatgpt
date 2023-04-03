@@ -45,7 +45,7 @@ def encode_prompt(prompt_instructions):
         prompt += f"{idx + 1}. 指令: {instruction}\n"
     prompt += f"###\n"
     prompt += f"{idx + 2}. 指令:"
-    print(prompt)
+    print(prompt, '==prompt==')
     return prompt
 
 def find_word_in_string(w, s):
