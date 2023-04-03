@@ -26,6 +26,14 @@ from  transformers import AutoTokenizer
 checkpoint = "/home/htxu91/chatgpt/data/bert_tiny"
 tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 
+import openai
+key_list = []
+with open('/home/htxu91/keys.txt', 'r') as frobj:
+    for line in frobj:
+        key_list.append(line.strip())
+
+random_key = np.random.choice(key_list)
+openai.api_key = random_key
 
 def encode_prompt(prompt_instructions):
     """Encode multiple prompt instructions into a single string."""
