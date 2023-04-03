@@ -46,7 +46,7 @@ def openai_completion(
     max_instances=10,
     max_batches=1,
     return_text=False,
-    **decoding_kwargs,
+    **decoding_kwargs
 ) -> Union[Union[StrOrOpenAIObject], Sequence[StrOrOpenAIObject], Sequence[Sequence[StrOrOpenAIObject]],]:
     """Decode with OpenAI API.
     Args:

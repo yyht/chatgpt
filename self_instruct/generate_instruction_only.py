@@ -84,7 +84,7 @@ def generate_instruction_following_data(
 
 
     idx = 0
-    with open('/home/htxu91/chatgpt/data/query_risk_ceber/query_risk_cyber.json', 'w') as fwobj:
+    with open('/home/htxu91/chatgpt/data/query_risk_ceber/query_risk_cyber.json', 'w') as fwobj
         while len(machine_instruction_data) < num_instructions_to_generate:
             request_idx += 1
 
