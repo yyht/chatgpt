@@ -69,7 +69,7 @@ def generate_instruction_following_data(
         {"instruction": t["instruction"]}
         for t in seed_tasks
     ]
-    
+
     print(f"Loaded {len(seed_instruction_data)} human-written seed instructions")
 
 
@@ -93,7 +93,7 @@ def generate_instruction_following_data(
 
 
     idx = 0
-    with open('/home/htxu91/chatgpt/data/query_risk_ceber/query_risk_cyber.json', 'w') as fwobj:
+    with open('/home/htxu91/chatgpt/data/query_risk_ceber/query_risk_cyber_white.json', 'w') as fwobj:
         while len(machine_instruction_data) < num_instructions_to_generate:
             request_idx += 1
 
