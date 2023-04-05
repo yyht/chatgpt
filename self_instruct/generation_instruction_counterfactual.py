@@ -96,6 +96,7 @@ def generate_instruction_following_data(
     with open('/home/htxu91/chatgpt/data/query_risk_ceber/query_risk_cyber_white.json', 'w') as fwobj:
         while len(machine_instruction_data) < num_instructions_to_generate:
             request_idx += 1
+            
 
             batch_inputs = []
             for _ in range(request_batch_size):
