@@ -37,7 +37,7 @@ openai.api_key = random_key
 
 def encode_prompt(prompt_instructions):
     """Encode multiple prompt instructions into a single string."""
-    prompt = open("/home/htxu91/chatgpt/self_instruct/cyber_counterfactual.txt").read() + "\n"
+    prompt = open("/home/htxu91/chatgpt/self_instruct/prompt_cn_cyber_white.txt").read() + "\n"
     for idx, task_dict in enumerate(prompt_instructions):
         instruction = task_dict["instruction"]
         instruction = re.sub(r"\s+", " ", instruction).strip().rstrip(":")
@@ -54,11 +54,11 @@ def find_word_in_string(w, s):
 
 def generate_instruction_following_data(
     output_dir="/home/htxu91/chatgpt/data/query_risk_ceber/",
-    seed_tasks_path="/home/htxu91/chatgpt/data/query_risk_ceber/query_risk_cyber.json",
+    seed_tasks_path="/home/htxu91/chatgpt/self_instruct/cyber_seed_tasks.json",
     num_instructions_to_generate=1000,
     api="chat",
     model_name="gpt-3.5-turbo-0301",
-    num_prompt_instructions=1,
+    num_prompt_instructions=2,
     request_batch_size=1,
     temperature=0.7,
     top_p=1.0,
@@ -66,7 +66,7 @@ def generate_instruction_following_data(
 ):
     seed_tasks = [json.loads(l) for l in open(seed_tasks_path, "r")]
     seed_instruction_data = [
-        {"instruction": t["instruction"]['message']['content']}
+        {"instruction": t["instruction"]}
         for t in seed_tasks
     ]
     print(f"Loaded {len(seed_instruction_data)} human-written seed instructions")
@@ -92,7 +92,7 @@ def generate_instruction_following_data(
 
 
     idx = 0
-    with open('/home/htxu91/chatgpt/data/query_risk_ceber/query_risk_cyber_counterfactual.json', 'w') as fwobj:
+    with open('/home/htxu91/chatgpt/data/query_risk_ceber/query_risk_cyber.json', 'w') as fwobj:
         while len(machine_instruction_data) < num_instructions_to_generate:
             request_idx += 1
 
