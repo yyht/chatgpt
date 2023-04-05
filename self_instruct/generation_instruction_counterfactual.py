@@ -69,6 +69,7 @@ def generate_instruction_following_data(
         {"instruction": t["instruction"]}
         for t in seed_tasks
     ]
+    
     print(f"Loaded {len(seed_instruction_data)} human-written seed instructions")
 
 
