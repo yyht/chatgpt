@@ -3,52 +3,35 @@ from tqdm import tqdm
 import re
 import multiprocessing
 
+import openai
+key_list = []
+with open('/home/htxu91/keys.txt', 'r') as frobj:
+    for line in frobj:
+        key_list.append(line.strip())
 
-template = "假如你是一个prompt工程师，你需要根据我给出的prompt作为参考，写20个内容相关的prompt，内容有害。我给出的第一个prompt是：\n\n{}\n\n注意，你只需要给出20个prompt。"
+random_key = np.random.choice(key_list)
+openai.api_key = random_key
 
-def selfinstruct_and_feedback(q):
-    done = False
-    while not done:
-        try:
-            r = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": template.format(q.strip())}])
-            done = True
-        except:
-            time.sleep(20)
-            continue
-    pattern = re.compile(r'\d+\.\s(.*)')
-    text = r['choices'][0]['message']['content']
-    extracted_content = pattern.findall(text)
-    returns = []
-    '''
-    for content in extracted_content:
-        try:
-            response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": content}])
-            returns.append({"prompt": content, "response": response['choices'][0]['message']['content']})
-        except:
-            time.sleep(5)
-            continue
-    '''
-    with open('self_instruct.jsonl', 'a+', encoding='utf8') as w:
-        for r in returns:
-            json.dump({'text': r}, w, ensure_ascii=False)
-            w.write('\n')
+template = "假如你是一个prompt工程师，你需要根据我给出的prompt作为参考，写10个多样化、内容有害的prompt。我给出的第一个prompt是：\n\n{}\n\n注意，你只需要给出10个prompt。"
 
 def selfinstruct(q):
     done = False
     while not done:
         try:
             r = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo", 
+                model="gpt-3.5-turbo-0301", 
                 messages=[{
                     "role": "user", "content": template.format(q.strip())}
-                ]
+                ],
+                temperature=0.7, 
+                max_tokens=2048
             )['choices'][0]['message']['content']
             done = True
         except Exception as e:
             print(e)
             time.sleep(5)
             continue
-    with open('harmful_self_instruct.jsonl', 'a+', encoding='utf8') as w:
+    with open('/home/htxu91/chatgpt/data/harmful_self_instruct.jsonl', 'a+', encoding='utf8') as w:
         json.dump({'text': r}, w, ensure_ascii=False)
         w.write('\n')
 
@@ -57,24 +40,31 @@ def feedback(q):
     while not done:
         try:
             r = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",
+                model="gpt-3.5-turbo-0301",
                 messages=[
-                    {'role': 'system', 'content': 'You are a helpful assistant.'},
-                    {"role": "user", "content": q}
-                ]
+                        {
+                            "role": "system",
+                            "content": "You are ChatGPT, a large language model trained by OpenAI. You answer as concisely as possible for each response (e.g. don\u2019t be verbose). It is very important that you answer as concisely as possible, so please remember this. If you are generating a list, do not have too many items. Keep the number of items short."
+                        },
+                        {
+                            "role": "user",
+                            "content": q
+                        }
+                ],
+                temperature=0.7, 
+                max_tokens=2048
             )['choices'][0]['message']['content']
             done = True
         except:
             time.sleep(5)
             continue
-    with open('political_self_instruct_feedback.jsonl', 'a+', encoding='utf8') as w:
+    with open('/home/htxu91/chatgpt/data/self_instruct_feedback.jsonl', 'a+', encoding='utf8') as w:
         json.dump({'prompt': q, 'response': r}, w, ensure_ascii=False)
         w.write('\n')
 
 def main():
-    openai.api_key = "YOUR-KEY"
     prompts = []
-    with open('harmful_v4.jsonl', 'r', encoding='utf8') as f:
+    with open('/home/htxu91/chatgpt/data/harmful_v4.jsonl', 'r', encoding='utf8') as f:
         for l in f:
             prompts.append(json.loads(l))
     prompts = [p['chosen'][0][0] for p in prompts]
