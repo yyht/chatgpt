@@ -37,7 +37,7 @@ openai.api_key = random_key
 
 def encode_prompt(prompt_instructions):
     """Encode multiple prompt instructions into a single string."""
-    prompt = open("/home/htxu91/chatgpt/self_instruct/prompt_cn_cyber_white.txt").read() + "\n"
+    prompt = open("/home/htxu91/chatgpt/self_instruct/prompt_cn_cyber_risk.txt").read() + "\n"
     for idx, task_dict in enumerate(prompt_instructions):
         instruction = task_dict["instruction"]
         instruction = re.sub(r"\s+", " ", instruction).strip().rstrip(":")
