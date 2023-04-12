@@ -42,9 +42,9 @@ def encode_prompt(prompt_instructions):
         instruction = task_dict["instruction"]
         instruction = re.sub(r"\s+", " ", instruction).strip().rstrip(":")
         prompt += f"###\n"
-        prompt += f"{idx + 1}. 指令: {instruction}\n"
+        prompt += f"{idx + 1}. prompt: {instruction}\n"
     prompt += f"###\n"
-    prompt += f"{idx + 2}. 指令:"
+    prompt += f"{idx + 2}. prompt:"
     print(prompt, '==prompt==')
     return prompt
 
