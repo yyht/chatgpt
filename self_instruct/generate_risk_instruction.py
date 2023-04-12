@@ -107,25 +107,26 @@ def generate_instruction_following_data(
                 stop=["\n20", "20.", "20."],
             )
             request_start = time.time()
-            results = utils.openai_completion(
-                prompts=batch_inputs,
-                api=api,
-                model_name=model_name,
-                batch_size=request_batch_size,
-                decoding_args=decoding_args,
-                logit_bias={"50256": -100},  # prevent the <|endoftext|> token from being generated
-            )
+            for _ in range(2):
+                results = utils.openai_completion(
+                    prompts=batch_inputs,
+                    api=api,
+                    model_name=model_name,
+                    batch_size=request_batch_size,
+                    decoding_args=decoding_args,
+                    logit_bias={"50256": -100},  # prevent the <|endoftext|> token from being generated
+                )
 
-            for result in results:
-                d = {
-                    'instruction':result,
-                    'input_prompt':batch_inputs
-                }
-                fwobj.write(json.dumps(d, ensure_ascii=False)+'\n')
-                if np.mod(request_idx, 100) == 0:
-                    print(d)
-                request_idx += 1
-                machine_instruction_data.append(d)
+                for result in results:
+                    d = {
+                        'instruction':result,
+                        'input_prompt':batch_inputs
+                    }
+                    fwobj.write(json.dumps(d, ensure_ascii=False)+'\n')
+                    if np.mod(request_idx, 1000) == 0:
+                        print(d)
+                    request_idx += 1
+                    machine_instruction_data.append(d)
 
 def main(task, **kwargs):
     globals()[task](**kwargs)
