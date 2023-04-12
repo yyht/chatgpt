@@ -121,7 +121,8 @@ def generate_instruction_following_data(
 
             for result in results:
                 d = {
-                    'instruction':result
+                    'instruction':result,
+                    'input_prompt':batch_inputs
                 }
                 fwobj.write(json.dumps(d, ensure_ascii=False)+'\n')
                 if np.mod(idx, 100) == 0:
