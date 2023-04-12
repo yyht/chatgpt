@@ -90,11 +90,8 @@ def generate_instruction_following_data(
         d["instruction"] for d in machine_instruction_data
     ]
 
-
-    idx = 0
     with open('/home/htxu91/chatgpt/data/query_risk/query_risk.json', 'w') as fwobj:
         while len(machine_instruction_data) < num_instructions_to_generate:
-            request_idx += 1
 
             batch_inputs = []
             for _ in range(request_batch_size):
@@ -125,9 +122,10 @@ def generate_instruction_following_data(
                     'input_prompt':batch_inputs
                 }
                 fwobj.write(json.dumps(d, ensure_ascii=False)+'\n')
-                if np.mod(idx, 100) == 0:
+                if np.mod(request_idx, 100) == 0:
                     print(d)
-                idx += 1
+                request_idx += 1
+                machine_instruction_data.append(d)
 
 def main(task, **kwargs):
     globals()[task](**kwargs)
