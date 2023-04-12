@@ -58,7 +58,7 @@ def generate_instruction_following_data(
     num_instructions_to_generate=1000000,
     api="chat",
     model_name="gpt-3.5-turbo-0301",
-    num_prompt_instructions=5,
+    num_prompt_instructions=2,
     request_batch_size=1,
     temperature=0.7,
     top_p=1.0,
