@@ -126,8 +126,8 @@ def generate_instruction_following_data(
                     if np.mod(request_idx, 1000) == 0:
                         print(d)
                     request_idx += 1
-                    machine_instruction_data.append(d)
-                    
+            machine_instruction_data.append(1)
+
 
 def main(task, **kwargs):
     globals()[task](**kwargs)
