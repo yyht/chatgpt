@@ -54,11 +54,11 @@ def quality_fn(query, response):
 
     for _ in range(10):
         try:
-            response = openai.ChatCompletion.create(model="gpt-3.5-turbo-0301", 
+            output_response = openai.ChatCompletion.create(model="gpt-3.5-turbo-0301", 
                                     messages=[{"role": "user", "content": quality_template.format(query, response)}],
                                     temperature=0.7, 
                                     max_tokens=512)
-            message = response['choices'][0]['message']['content']
+            message = output_response['choices'][0]['message']['content']
             break
         except:
             message = 'invalid'
@@ -75,7 +75,7 @@ with open('/home/htxu91/chatgpt/data/query_risk/query_merge.txt.chatgpt', 'w') a
             query = content['text']
             content['chatgpt'] = {
                 'response':qa_fn(query),
-                'query_quality':quality_fn(query),
+                'query_quality':quality_fn(query, ''),
                 'response_prompt':qa_template.format(query),
                 'query_quality_prompt':quality_template.format(query)
             }
