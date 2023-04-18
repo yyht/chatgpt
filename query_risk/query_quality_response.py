@@ -69,10 +69,10 @@ import pandas as pd
 
 with open('/home/htxu91/chatgpt/data/query_risk/query_merge.txt.chatgpt', 'w') as fwobj:
     with open('/home/htxu91/chatgpt/data/query_risk/query_merge.txt', 'r') as frobj:
-        for line in tqdm(frobj):
+        for idx, line in tqdm(enumerate(frobj)):
             content = json.loads(line.strip())
             
-            query = content['query']
+            query = content['text']
             content['chatgpt'] = {
                 'response':qa_fn(query),
                 'query_quality':quality_fn(query),
