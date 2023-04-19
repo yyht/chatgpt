@@ -71,8 +71,8 @@ with open('/home/htxu91/chatgpt/data/query_risk/risk_query_完整.json.chatgpt',
     with open('/home/htxu91/chatgpt/data/query_risk/risk_query_完整.json', 'r') as frobj:
         for idx, line in tqdm(enumerate(frobj)):
             content = json.loads(line.strip())
-            
-            query = content['text']
+            content['text'] = content['query']
+            query = content['query']
             content['chatgpt'] = {
                 'response':qa_fn(query),
                 'query_quality':quality_fn(query, ''),
