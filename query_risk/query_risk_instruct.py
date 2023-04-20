@@ -73,12 +73,14 @@ with open('/home/htxu91/chatgpt/data/query_risk/Q_benchmark_v0_1.xlsx.chatgpt', 
     for idx in tqdm(range(df.shape[0])):
         content = df.loc[idx]
         d = {}
+        print(content)
         for key in content:
+            print(key, '===', content[key])
             d[key] = str(content[key])
         
         query = d['query']
 
-        content['chatgpt'] = {
+        d['chatgpt'] = {
             'response':qa_fn(query),
             'query_quality':quality_fn(query, ''),
             'response_prompt':qa_template.format(query),
@@ -86,7 +88,7 @@ with open('/home/htxu91/chatgpt/data/query_risk/Q_benchmark_v0_1.xlsx.chatgpt', 
         }
         
         if np.mod(idx, 1000) == 0:
-            print(content, '====model====', 'gpt-3.5-turbo')
-        fwobj.write(json.dumps(content, ensure_ascii=False)+'\n')
+            print(d, '====model====', 'gpt-3.5-turbo')
+        fwobj.write(json.dumps(d, ensure_ascii=False)+'\n')
         
 
