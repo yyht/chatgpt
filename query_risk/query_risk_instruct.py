@@ -73,9 +73,8 @@ with open('/home/htxu91/chatgpt/data/query_risk/Q_benchmark_v0_1.xlsx.chatgpt', 
     for idx in tqdm(range(df.shape[0])):
         content = df.loc[idx]
         d = {}
-        print(content)
         for key in content:
-            print(key, '===', content[key])
+            print(key, '===')
             d[key] = str(content[key])
         
         query = d['query']
