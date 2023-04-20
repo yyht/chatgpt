@@ -72,9 +72,12 @@ with open('/home/htxu91/chatgpt/data/query_risk/Q_benchmark_v0_1.xlsx.chatgpt', 
     df = pd.read_excel('/home/htxu91/chatgpt/data/query_risk/Q_benchmark_v0_1.xlsx')
     for idx in tqdm(range(df.shape[0])):
         content = df.loc[idx]
+        d = {}
+        for key in content:
+            d[key] = str(content[key])
         
-        query = content['query']
-        
+        query = d['query']
+
         content['chatgpt'] = {
             'response':qa_fn(query),
             'query_quality':quality_fn(query, ''),
