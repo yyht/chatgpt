@@ -74,7 +74,6 @@ with open('/home/htxu91/chatgpt/data/query_risk/Q_benchmark_v0_1.xlsx.chatgpt', 
         content = df.loc[idx]
         d = {}
         for key in content.keys():
-            print(key, '===')
             d[key] = str(content[key])
         
         query = d['query']
