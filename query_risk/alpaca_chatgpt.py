@@ -67,10 +67,13 @@ def quality_fn(query, response):
 
 import pandas as pd
 
-with open('/home/htxu91/chatgpt/data/alpaca/alpaca.json.chatgpt', 'w') as fwobj:
+with open('/home/htxu91/chatgpt/data/alpaca/alpaca.json.chatgpt.latest', 'w') as fwobj:
 	with open('/home/htxu91/chatgpt/data/alpaca/alpaca.json', 'r') as frobj:
 		for idx, line in tqdm(enumerate(frobj)):
 			content = json.loads(line.strip())
+
+			if idx <= 3154:
+				continue
 			
 			query = content['user_input']
 			content['responses_and_scores'].append({
