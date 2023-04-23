@@ -71,6 +71,9 @@ with open('/home/htxu91/chatgpt/data/query_risk/query_merge.txt.chatgpt', 'w') a
     with open('/home/htxu91/chatgpt/data/query_risk/query_merge.txt', 'r') as frobj:
         for idx, line in tqdm(enumerate(frobj)):
             content = json.loads(line.strip())
+
+            if idx <= 24626:
+                continue
             
             query = content['text']
             content['chatgpt'] = {
