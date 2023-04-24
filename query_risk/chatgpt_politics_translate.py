@@ -67,8 +67,8 @@ def quality_fn(query, response):
 
 import pandas as pd
 
-with open('/home/htxu91/chatgpt/data/green_politics.json.detail', 'w') as fwobj:
-	with open('/home/htxu91/chatgpt/data/green_politics.json.detail.translate', 'r') as frobj:
+with open('/home/htxu91/chatgpt/data/green_politics.json.detail.translate', 'w') as fwobj:
+	with open('/home/htxu91/chatgpt/data/green_politics.json.detail', 'r') as frobj:
 		for idx, line in tqdm(enumerate(frobj)):
 			content = json.loads(line.strip())
 
