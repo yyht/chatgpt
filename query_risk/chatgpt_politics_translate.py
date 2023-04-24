@@ -69,6 +69,7 @@ import pandas as pd
 
 with open('/home/htxu91/chatgpt/data/green_politics.json.detail.translate', 'w') as fwobj:
 	with open('/home/htxu91/chatgpt/data/green_politics.json.detail', 'r') as frobj:
+		idx_cnt = 0
 		for idx, line in tqdm(enumerate(frobj)):
 			content = json.loads(line.strip())
 
@@ -81,8 +82,8 @@ with open('/home/htxu91/chatgpt/data/green_politics.json.detail.translate', 'w')
 					'score':8.0
 			}
 				
-			if np.mod(idx, 1000) == 0:
+			if np.mod(idx_cnt, 1000) == 0:
 				print(content, '====model====', 'gpt-3.5-turbo')
 			fwobj.write(json.dumps(content, ensure_ascii=False)+'\n')
-			
+			idx_cnt += 1
 
