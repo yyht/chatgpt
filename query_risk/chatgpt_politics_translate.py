@@ -73,7 +73,7 @@ with open('/home/htxu91/chatgpt/data/green_politics.json.detail.translate', 'w')
 			content = json.loads(line.strip())
 
 			query = content['text']
-			if content['label'] in ['正常']:
+			if content['label'][0] in ['正常']:
 				continue
 			content['translate'] = {
 					'response':qa_fn(query),
