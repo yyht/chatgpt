@@ -67,12 +67,12 @@ def quality_fn(query, response):
 
 import pandas as pd
 
-with open('/home/htxu91/chatgpt/data/query_risk/query_merge.txt.chatgpt.latest', 'w') as fwobj:
+with open('/home/htxu91/chatgpt/data/query_risk/query_merge.txt.chatgpt.latest.1', 'w') as fwobj:
     with open('/home/htxu91/chatgpt/data/query_risk/query_merge.txt', 'r') as frobj:
         for idx, line in tqdm(enumerate(frobj)):
             content = json.loads(line.strip())
 
-            if idx <= 20904:
+            if idx <= 34379:
                 continue
             
             query = content['text']
