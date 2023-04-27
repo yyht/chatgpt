@@ -70,7 +70,10 @@ import pandas as pd
 with open('/home/htxu91/chatgpt/data/green_politics.json.detail.translate') as frobj:
 	data_dict = {}
 	for line in frobj:
-		content = json.loads(line.strip())
+		try:
+			content = json.loads(line.strip())
+		except:
+			continue
 		if content['text'] not in data_dict:
 			data_dict[content['text']] = content
 
