@@ -67,17 +67,23 @@ def quality_fn(query, response):
 
 import pandas as pd
 
+with open('/home/htxu91/chatgpt/data/green_politics.json.detail.translate') as frobj:
+	data_dict = {}
+	for line in frobj:
+		content = json.loads(line.strip())
+		if content['text'] not in data_dict:
+			data_dict[content['text']] = content
+
 with open('/home/htxu91/chatgpt/data/green_politics.json.detail.translate.2', 'w') as fwobj:
 	with open('/home/htxu91/chatgpt/data/green_politics.json.detail', 'r') as frobj:
 		idx_cnt = 0
 		for idx, line in tqdm(enumerate(frobj)):
 			content = json.loads(line.strip())
 
-			if idx_cnt <= 13596:
-				continue
-
 			query = content['text']
 			if content['label'][0] in ['正常']:
+				continue
+			if content['text'] in data_dict:
 				continue
 			content['translate'] = {
 					'response':qa_fn(query),
