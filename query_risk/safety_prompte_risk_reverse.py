@@ -70,14 +70,12 @@ def reverse(data_list, chunks, chunk_key, output_file_):
         for idx in tqdm(chunks):
             item = data_list[idx]
 
-            print(item)
-
             if not item['is_response_0_safe']:
                 source = 'response_0'
             elif not item['is_response_1_safe']:
                 source = 'response_1'
 
-            prompt = meta_prompt.format(item['prompt'], item[source])
+            prompt = meta_prompt.format(item['query'], item[source])
 
             random_key = np.random.choice(key_list)
             openai.api_key = random_key
