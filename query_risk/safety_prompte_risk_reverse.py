@@ -107,7 +107,7 @@ def reverse(data_list, chunks, chunk_key, output_file_):
                 print(item, '====model====', 'gpt-3.5-turbo')
 
 data_list = []
-with open('/home/htxu91/safety_prompt_reverse/safety_prompt_reverse.txt.merge_predict.txt.jsonl') as frobj:
+with open('/home/htxu91/safety_prompt_risk_reverse/safety_prompt_reverse.txt.merge_predict.txt.jsonl') as frobj:
     for line in frobj:
         content = json.loads(line.strip())
         data_list.append(content)
