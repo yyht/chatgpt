@@ -68,12 +68,14 @@ def reverse(data_list, chunks, chunk_key, output_file_):
             openai.api_key = random_key
 
             for conversation in item['conversations']:
+                if conversation['from'] not in ['human']:
+                    continue
                 prompt = meta_prompt.format(conversation['value'])
                 for _ in range(10):
                     try:
                         response = openai.ChatCompletion.create(model="gpt-3.5-turbo-0613", 
                                                 messages=[{"role": "user", "content": prompt}],
-                                                temperature=1.0,
+                                                temperature=0.7,
                                                 presence_penalty=0.0,
                                                 top_p=1.0,
                                                 frequency_penalty=0.0,
