@@ -20,6 +20,9 @@ I want you to act as an Chinese translator, spelling corrector and improver. I w
 翻译文本:
 """
 
+ans_prompt = """
+"""
+
 from tqdm import tqdm
 from multiprocessing import Process, Manager
 import multiprocessing
