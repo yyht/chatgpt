@@ -81,7 +81,7 @@ def reverse(data_list, chunks, chunk_key, output_file_):
                 prompt = meta_prompt.format(conversation['value'])
                 for _ in range(10):
                     try:
-                        response = openai.ChatCompletion.create(model="gpt-3.5-turbo", 
+                        response = openai.ChatCompletion.create(model="gpt-3.5-turbo-0613", 
                                                 messages=[{"role": "user", "content": prompt}],
                                                 temperature=0.7,
                                                 presence_penalty=0.0,
@@ -107,7 +107,7 @@ with open('/home/htxu91/instruction_dataset/WizardLM_evol_instruct_V2_196k/Wizar
 
 output_file = '/home/htxu91/instruction_dataset/WizardLM_evol_instruct_V2_196k/translate'
 
-process_num = 1
+process_num = 10
 multi_process(data_list,
                 output_file,
                 process_num,
