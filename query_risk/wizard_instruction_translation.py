@@ -76,7 +76,7 @@ def reverse(data_list, chunks, chunk_key, output_file_):
                 prompt = meta_prompt.format(conversation['value'])
                 for _ in range(10):
                     try:
-                        response = openai.ChatCompletion.create(model="gpt-3.5-turbo-0613", 
+                        response = openai.ChatCompletion.create(model="gpt-3.5-turbo", 
                                                 messages=[{"role": "user", "content": prompt}],
                                                 temperature=0.7,
                                                 presence_penalty=0.0,
