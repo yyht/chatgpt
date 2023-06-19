@@ -6,6 +6,7 @@ import json
 from tqdm import tqdm
 import numpy as np
 import time, re
+import time
 
 key_list = []
 with open('/home/htxu91/keys.txt', 'r') as frobj:
@@ -72,6 +73,8 @@ def reverse(data_list, chunks, chunk_key, output_file_):
 
             random_key = np.random.choice(key_list)
             openai.api_key = random_key
+
+            time.sleep(1)
 
             for conversation in item['conversations']:
                 if conversation['from'] not in ['human']:
