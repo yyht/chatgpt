@@ -86,6 +86,7 @@ def reverse(data_list, chunks, chunk_key, output_file_):
                         response_passage = 'invalid'
                         continue
                 conversation['value_translate'] = response_passage
+                conversation['prompt'] = prompt
 
             fwobj.write(json.dumps(item, ensure_ascii=False)+'\n')
 
