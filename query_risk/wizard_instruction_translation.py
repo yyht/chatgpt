@@ -13,8 +13,8 @@ with open('/home/htxu91/keys.txt', 'r') as frobj:
         key_list.append(line.strip())
 
 meta_prompt = """
-翻译成中文:
-{}
+将输入文本翻译成中文:
+输入文本: {}
 """
 
 from tqdm import tqdm
