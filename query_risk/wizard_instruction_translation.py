@@ -107,7 +107,7 @@ with open('/home/htxu91/instruction_dataset/WizardLM_evol_instruct_V2_196k/Wizar
 
 output_file = '/home/htxu91/instruction_dataset/WizardLM_evol_instruct_V2_196k/translate'
 
-process_num = 10
+process_num = 1
 multi_process(data_list,
                 output_file,
                 process_num,
