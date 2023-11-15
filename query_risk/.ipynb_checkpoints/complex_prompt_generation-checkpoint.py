@@ -89,8 +89,8 @@ def reverse(data_list, chunks, chunk_key, output_file_):
             
             for senti in senti_list:
                 _, topic = issue.split('-')
-                meta_prompt = prompt.format(
-                    issue.replace('-', ''), topic, senti)
+                meta_prompt = prompt.format(issue.replace('-', ''), 
+                                            topic, senti, issue)
             
                 for _ in range(10):
                     try:
