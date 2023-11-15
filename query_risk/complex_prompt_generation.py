@@ -110,7 +110,7 @@ def reverse(data_list, chunks, chunk_key, output_file_):
                         continue
                 tmp['prompt'].append(meta_prompt)
                 tmp['response'].append(response)
-                if np.mod(i, 100) == 0:
+                if np.mod(i, 2) == 0:
                     print(tmp, '====model====', 'gpt-3.5-turbo')
             fwobj.write(json.dumps(tmp, ensure_ascii=False)+'\n')
 
