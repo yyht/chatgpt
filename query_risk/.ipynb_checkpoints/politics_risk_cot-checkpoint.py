@@ -102,7 +102,7 @@ with open('/home/htxu91/risk_cot/black_politics_sample.json') as frobj:
         d = json.loads(line.strip())
         data_list.append(d)
 
-output_file = '/home/htxu91/risk_cot/black_politics_sample/'
+output_file = '/home/htxu91/risk_cot/'
 
 process_num = 10
 multi_process(data_list,
