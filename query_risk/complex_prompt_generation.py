@@ -210,7 +210,7 @@ data_list = [
 ]
 
 
-# output_file = '/home/htxu91/risk_generation/'
+output_file = '/home/htxu91/risk_generation/'
 # output_file_ = output_file + "/translate.txt.{}".format(0)
 # reverse(data_list, {0:[1,2,3]}, 0, 
 #                 output_file_)
