@@ -95,7 +95,8 @@ def reverse(data_list, chunks, chunk_key, output_file_):
                 for _ in range(10):
                     try:
                         response = openai.ChatCompletion.create(model="gpt-3.5-turbo-0613", 
-                                                messages=[{"role": "user", "content": prompt}],
+                                                messages=[{"role": "system", "content": system},
+                    {"role": "user", "content": meta_prompt}],
                                                 temperature=0.7,
                                                 presence_penalty=0.0,
                                                 top_p=1.0,
