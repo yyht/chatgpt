@@ -94,7 +94,7 @@ def reverse(data_list, chunks, chunk_key, output_file_):
             time.sleep(1)
             user_prompt = item['instruction']+'\n'+item['input']+'\n'+'摘要:'
 
-            for _ in range(10):
+            for _ in range(1):
                 # try:
                 response = openai.ChatCompletion.create(model="gpt-3.5-turbo-16k-0613", 
 messages=[{"role": "system", "content": item['system']},
@@ -136,7 +136,7 @@ with open('/home/htxu91/kedaibiao_timeline/train_asr_no_timeline_v1_partial_samp
 
 output_file = '/home/htxu91/kedaibiao_timeline/'
 
-reverse(data_list, {0:[1,2,3]}, 0, 
+reverse(data_list, [1,2,3,4], 0, 
                 output_file+'/test')
 
 # process_num = 10
