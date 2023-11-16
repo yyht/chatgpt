@@ -109,11 +109,11 @@ def reverse(data_list, chunks, chunk_key, output_file_):
                 except:
                     response_passage = 'invalid'
                     continue
-            item['prompt'] = {
+            item['chatgpt'] = {
                 'system': system,
-                'user': user_prompt
+                'user': user_prompt,
+                'response': response_passage
             }
-            item['chatgpt'] = response_passage
             fwobj.write(json.dumps(item, ensure_ascii=False)+'\n')
 
             if np.mod(idx, 100) == 0:
