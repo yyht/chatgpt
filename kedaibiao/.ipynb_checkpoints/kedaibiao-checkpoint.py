@@ -120,7 +120,7 @@ def reverse(data_list, chunks, chunk_key, output_file_):
                 print(item, '====model====', 'gpt-3.5-turbo')
 
 data_list = []
-with open('/home/htxu91/kedaibiao_timeline/train_asr_timeline_v1_partial.json') as frobj:
+with open('/home/htxu91/kedaibiao_timeline/train_asr_no_timeline_v1_partial_sample.json') as frobj:
     for line in frobj:
         d = json.loads(line.strip())
         if '在段落细节前面加入时间锚点' in d:
