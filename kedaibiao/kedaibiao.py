@@ -110,7 +110,7 @@ messages=[{"role": "system", "content": item['system']},
                 #     response_passage = 'invalid'
                 #     continue
             item['chatgpt'] = {
-                'system': system,
+                'system': item['system'],
                 'user': user_prompt,
                 'response': response_passage
             }
