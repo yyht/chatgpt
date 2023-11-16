@@ -92,7 +92,7 @@ def reverse(data_list, chunks, chunk_key, output_file_):
             openai.api_key = random_key
 
             time.sleep(1)
-            user_prompt = item['instruction']+'\n'+item['input']+'\n'+'摘要:'
+            user_prompt = item['instruction']+'\nASR: '+item['input']+'\n'+'摘要:'
 
             for _ in range(10):
                 try:
