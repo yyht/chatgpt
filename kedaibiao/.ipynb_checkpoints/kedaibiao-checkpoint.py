@@ -95,20 +95,20 @@ def reverse(data_list, chunks, chunk_key, output_file_):
             user_prompt = item['instruction']+'\n'+item['input']+'\n'+'摘要:'
 
             for _ in range(10):
-                try:
-                    response = openai.ChatCompletion.create(model="gpt-3.5-turbo-16k-0613", 
-    messages=[{"role": "system", "content": item['system']},
-              {'role':'user', "content":user_prompt}],
-                                            temperature=0.7,
-                                            presence_penalty=0.0,
-                                            top_p=1.0,
-                                            frequency_penalty=0.0,
-                                            max_tokens=8192)
-                    response_passage = response['choices'][0]['message']['content']
-                    break
-                except:
-                    response_passage = 'invalid'
-                    continue
+                # try:
+                response = openai.ChatCompletion.create(model="gpt-3.5-turbo-16k-0613", 
+messages=[{"role": "system", "content": item['system']},
+          {'role':'user', "content":user_prompt}],
+                                        temperature=0.7,
+                                        presence_penalty=0.0,
+                                        top_p=1.0,
+                                        frequency_penalty=0.0,
+                                        max_tokens=8192)
+                response_passage = response['choices'][0]['message']['content']
+                #     break
+                # except:
+                #     response_passage = 'invalid'
+                #     continue
             item['chatgpt'] = {
                 'system': system,
                 'user': user_prompt,
@@ -136,9 +136,12 @@ with open('/home/htxu91/kedaibiao_timeline/train_asr_no_timeline_v1_partial_samp
 
 output_file = '/home/htxu91/kedaibiao_timeline/'
 
-process_num = 10
-multi_process(data_list,
-                output_file,
-                process_num,
-                random_seed=2018)
+reverse(data_list, {0:[1,2,3]}, 0, 
+                output_file+'/test')
+
+# process_num = 10
+# multi_process(data_list,
+#                 output_file,
+#                 process_num,
+#                 random_seed=2018)
 
