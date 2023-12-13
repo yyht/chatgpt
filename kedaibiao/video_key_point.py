@@ -92,7 +92,8 @@ def generate_fn(d_dict, key, output_file_):
             seed = random.choice(template)
             time.sleep(1)
             output_list = []
-            for _ in range(10):
+            for _ in range(5):
+                seed = random.choice(template)
                 try:
                     response = openai.ChatCompletion.create(
                         model="gpt-3.5-turbo-16k-0613", 
@@ -104,14 +105,18 @@ def generate_fn(d_dict, key, output_file_):
                                     frequency_penalty=0.0,
                                     max_tokens=2048)
                     response_passage = response['choices'][0]['message']['content']
-                    break
+                    output_list.append({
+                        'template': seed,
+                        'response': response_passage
+                    })
+                    continue
                 except:
                     response_passage = ''
                     continue
                 
             d['key_summary'] = {
                 'system': seed,
-                'response': response_passage
+                'response': output_list
             }
             fwobj.write(json.dumps(d, ensure_ascii=False)+'\n')
             # break
