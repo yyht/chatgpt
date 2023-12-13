@@ -97,7 +97,7 @@ def generate_fn(d_dict, key, output_file_):
                     response = openai.ChatCompletion.create(
                         model="gpt-3.5-turbo-16k-0613", 
                         messages=[{"role": "system", "content": seed},
-                      {'role':'user', "content":d['asr_时间戳']}],
+                      {'role':'user', "content": f"example1: \ninput:\nASR: {d['asr_时间戳']}\noutput:\n"}],
                                     temperature=0.7,
                                     presence_penalty=0.0,
                                     top_p=1.0,
