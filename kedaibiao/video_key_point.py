@@ -90,21 +90,21 @@ def generate_fn(d_dict, key, output_file_):
             time.sleep(1)
             output_list = []
             for _ in range(10):
-                try:
-                    response = openai.ChatCompletion.create(
-                        model="gpt-3.5-turbo-16k-0613", 
-                        messages=[{"role": "system", "content": seed},
-                      {'role':'user', "content":d['asr_时间戳']}],
-                                    temperature=0.7,
-                                    presence_penalty=0.0,
-                                    top_p=1.0,
-                                    frequency_penalty=0.0,
-                                    max_tokens=2048)
-                    response_passage = response['choices'][0]['message']['content']
-                    break
-                except:
-                    response = ''
-                    continue
+                # try:
+                response = openai.ChatCompletion.create(
+                    model="gpt-3.5-turbo-16k-0613", 
+                    messages=[{"role": "system", "content": seed},
+                  {'role':'user', "content":d['asr_时间戳']}],
+                                temperature=0.7,
+                                presence_penalty=0.0,
+                                top_p=1.0,
+                                frequency_penalty=0.0,
+                                max_tokens=2048)
+                response_passage = response['choices'][0]['message']['content']
+                #     break
+                # except:
+                #     response = ''
+                #     continue
                 
             d['key_summary'] = {
                 'system': seed,
