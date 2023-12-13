@@ -85,12 +85,15 @@ def generate_fn(d_dict, key, output_file_):
                 continue
             if 'asr_text' not in d['new_asr']:
                 continue
+                
+            random_key = np.random.choice(key_list)
+            openai.api_key = random_key
     
             seed = random.choice(template)
             time.sleep(1)
             output_list = []
             for _ in range(10):
-                # try:
+                try:
                     response = openai.ChatCompletion.create(
                         model="gpt-3.5-turbo-16k-0613", 
                         messages=[{"role": "system", "content": seed},
@@ -101,20 +104,20 @@ def generate_fn(d_dict, key, output_file_):
                                     frequency_penalty=0.0,
                                     max_tokens=2048)
                     response_passage = response['choices'][0]['message']['content']
-                #     break
-                # except:
-                #     response = ''
-                #     continue
+                    break
+                except:
+                    response_passage = ''
+                    continue
                 
             d['key_summary'] = {
                 'system': seed,
-                'response': response
+                'response': response_passage
             }
             fwobj.write(json.dumps(d, ensure_ascii=False)+'\n')
             break
             
 output_file = '/home/htxu91/video_key_point_latest'
-generate_fn(d_dict, '三农', '/home/htxu91/video_key_point/test.jsonl')
-# multi_process(d_dict,
-#                 output_file,
-#                 random_seed=2018)
+# generate_fn(d_dict, '三农', '/home/htxu91/video_key_point/test.jsonl')
+multi_process(d_dict,
+                output_file,
+                random_seed=2018)
