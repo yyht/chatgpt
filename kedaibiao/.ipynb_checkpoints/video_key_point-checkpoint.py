@@ -104,6 +104,7 @@ def generate_fn(d_dict, key, output_file_):
                                     frequency_penalty=0.0,
                                     max_tokens=2048)
                     response_passage = response['choices'][0]['message']['content']
+                    break
                 except:
                     response_passage = ''
                     continue
