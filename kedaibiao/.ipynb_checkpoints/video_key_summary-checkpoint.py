@@ -1,7 +1,7 @@
 
 
 prompt_template = """
-我希望你是一名专业的视频内容编辑，帮我用中文总结视频的内容精华。请先用一句简短的话总结视频梗概。然后再请你将视频字幕文本进行总结（字幕中可能有错别字，如果你发现了错别字请改正），在每句话的最前面加上时间戳#timestamp，每句话开头只需要一个开始时间。请你以无序列表的方式返回，请注意不要超过5条哦，确保所有的句子都足够精简，清晰完整，祝你好运！
+我希望你是一名专业的视频内容编辑，帮我用中文总结视频的内容精华。请先用一句简短的话总结视频梗概。然后再请你将视频字幕文本进行总结（字幕中可能有错别字，如果你发现了错别字请改正），在每句话的最前面加上时间戳#timestamp，每句话开头只需要一个开始时间。请你以无序列表的方式返回，请注意不要超过10条哦，确保所有的句子都足够精简，清晰完整，祝你好运！
 视频ASR: {}
 """
 
@@ -120,7 +120,7 @@ def generate_fn(d_dict, key, output_file_):
             fwobj.write(json.dumps(d, ensure_ascii=False)+'\n')
             # break
             
-output_file = '/home/htxu91/video_key_point_latest_v1'
+output_file = '/home/htxu91/video_key_point_latest_v2'
 # generate_fn(d_dict, '三农', '/home/htxu91/video_key_point/test.jsonl')
 multi_process(d_dict,
                 output_file,
